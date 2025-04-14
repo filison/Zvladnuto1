@@ -85,3 +85,38 @@ section#dashboard {
 #dashboard i {
   font-size: 20px;
 }
+.tips-section {
+  background-color: #121212;
+  color: #ffffff;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.tips-section h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.tips-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.tip-box {
+  background-color: #1f1f1f;
+  border-radius: 10px;
+  padding: 15px;
+  width: 160px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.tip-box p {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.tip-box span {
+  font-size: 14px;
+}
