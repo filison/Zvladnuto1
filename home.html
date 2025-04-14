@@ -3,163 +3,169 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Zvládnu to – Domů</title>
+  <title>Domů – Zvládnu to</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
     body {
-      margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: #f4f4f4;
-      color: #333;
-    }
-
-    header {
-      background: #247ba0;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #70c1b3, #247ba0);
       color: white;
-      padding: 20px;
-      text-align: center;
+      min-height: 100vh;
     }
 
     .container {
-      padding: 20px;
-      max-width: 1000px;
+      max-width: 960px;
       margin: auto;
+      padding: 30px 20px;
     }
 
-    h2 {
-      margin-top: 40px;
-      margin-bottom: 15px;
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
     }
 
-    /* Rozcestník */
-    .grid {
+    #toggleTheme {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 15px;
+      background: #fff;
+      color: #247ba0;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .tiles {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 20px;
+      margin: 30px 0;
     }
 
     .tile {
-      background-color: #ffffff;
-      padding: 20px;
+      background: rgba(255,255,255,0.15);
       border-radius: 12px;
       text-align: center;
-      font-size: 15px;
-      font-weight: bold;
-      color: #247ba0;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      transition: transform 0.2s, background-color 0.3s;
+      padding: 20px;
       cursor: pointer;
+      transition: all 0.3s;
     }
 
     .tile:hover {
-      transform: scale(1.05);
-      background-color: #e6f7ff;
+      background: rgba(255,255,255,0.25);
     }
 
     .tile i {
-      font-size: 26px;
+      font-size: 28px;
       margin-bottom: 10px;
-      color: #247ba0;
+      display: block;
     }
 
-    /* Tipy */
     .tip {
-      background: white;
-      border-radius: 8px;
       margin-bottom: 15px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
     .tip-toggle {
-      padding: 15px;
-      font-weight: bold;
+      background: rgba(255,255,255,0.1);
+      padding: 10px;
+      border: none;
+      color: white;
+      width: 100%;
+      text-align: left;
       cursor: pointer;
-      background: #e8f6f9;
-      border-radius: 8px 8px 0 0;
+      border-radius: 8px;
     }
 
     .tip-content {
       display: none;
-      padding: 15px;
-      border-top: 1px solid #ddd;
-    }
-
-    /* Graf */
-    #myChart {
-      max-width: 100%;
-      margin-top: 30px;
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    #logoutBtn {
-      margin-top: 20px;
-      background: #f44336;
-      color: white;
-      border: none;
-      padding: 10px 20px;
+      background: rgba(255,255,255,0.05);
+      padding: 10px;
       border-radius: 8px;
+      margin-top: 5px;
+    }
+
+    #myChart {
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+    }
+
+    .top-icons {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 22px;
+    }
+
+    .top-icons i {
+      margin-left: 15px;
       cursor: pointer;
     }
 
-    #logoutBtn:hover {
-      background: #d32f2f;
+    /* Dark mode */
+    body.dark-mode {
+      background: #121212;
+      color: #f0f0f0;
+    }
+
+    body.dark-mode .tile {
+      background: #1e1e1e;
+      color: #eee;
+    }
+
+    body.dark-mode .tile:hover {
+      background: #2e2e2e;
+    }
+
+    body.dark-mode .tip-toggle {
+      background: #2a2a2a;
+    }
+
+    body.dark-mode .tip-content {
+      background: #1b1b1b;
+    }
+
+    body.dark-mode #myChart {
+      background: #fff;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Vítej zpět ve Zvládnu to!</h1>
-  </header>
+  <div class="top-icons">
+    <i class="fas fa-bell" onclick="alert('Žádné nové notifikace')"></i>
+    <i class="fas fa-user-circle" onclick="window.location.href='profil.html'"></i>
+  </div>
 
   <div class="container">
-    <button id="logoutBtn">Odhlásit se</button>
+    <h1>Vítej zpět, zvládneš to!</h1>
 
-    <h2>Rozcestník</h2>
-    <div class="grid">
-      <div class="tile" onclick="alert('Chytrý pomocník zatím není aktivní')">
-        <i class="fas fa-robot"></i><br>Chytrý pomocník
-      </div>
-      <div class="tile" onclick="alert('Rozpočet')">
-        <i class="fas fa-wallet"></i><br>Můj rozpočet
-      </div>
-      <div class="tile" onclick="alert('Nákupy')">
-        <i class="fas fa-shopping-cart"></i><br>Nákupy
-      </div>
-      <div class="tile" onclick="alert('Recepty')">
-        <i class="fas fa-utensils"></i><br>Recepty
-      </div>
-      <div class="tile" onclick="alert('Tarify')">
-        <i class="fas fa-bolt"></i><br>Srovnání tarifů
-      </div>
-      <div class="tile" onclick="alert('Prodej doma')">
-        <i class="fas fa-box-open"></i><br>Prodej doma
-      </div>
-    </div>
+    <canvas id="myChart"></canvas>
 
-    <h2>Přehled</h2>
-    <canvas id="myChart" height="150"></canvas>
-
-    <h2>Tipy na úsporu</h2>
-
-    <div class="tip">
-      <div class="tip-toggle">1. Sleduj akce v supermarketech</div>
-      <div class="tip-content">Pravidelně sleduj letáky a srovnávej ceny v různých obchodech. Můžeš ušetřit stovky měsíčně.</div>
+    <div class="tiles">
+      <div class="tile" onclick="location.href='pomocnik.html'"><i class="fas fa-robot"></i>Chytrý pomocník</div>
+      <div class="tile" onclick="location.href='rozpocet.html'"><i class="fas fa-wallet"></i>Můj rozpočet</div>
+      <div class="tile" onclick="location.href='nakupy.html'"><i class="fas fa-shopping-cart"></i>Nákupy a slevy</div>
+      <div class="tile" onclick="location.href='recepty.html'"><i class="fas fa-utensils"></i>Levné recepty</div>
+      <div class="tile" onclick="location.href='tarify.html'"><i class="fas fa-bolt"></i>Srovnávač tarifů</div>
+      <div class="tile" onclick="location.href='prodej.html'"><i class="fas fa-box-open"></i>Co můžu prodat</div>
     </div>
 
     <div class="tip">
-      <div class="tip-toggle">2. Omez zbytečné předplatné</div>
-      <div class="tip-content">Zkontroluj, za co platíš pravidelně – některé služby možná ani nepoužíváš.</div>
+      <button class="tip-toggle">Tip 1: Vytvoř si rozpočet</button>
+      <div class="tip-content">Zapiš si všechny příjmy a výdaje. Uvidíš, kde lze snadno ušetřit.</div>
     </div>
 
     <div class="tip">
-      <div class="tip-toggle">3. Plánuj jídla dopředu</div>
-      <div class="tip-content">Pomáhá to omezit impulzivní nákupy a zbytečné vyhazování jídla.</div>
+      <button class="tip-toggle">Tip 2: Sleduj slevy</button>
+      <div class="tip-content">Využívej akce a plánuj nákupy podle letáků. Můžeš ušetřit stovky měsíčně.</div>
     </div>
   </div>
+
+  <button id="toggleTheme">Přepnout režim</button>
 
   <script>
     // Ověření přihlášení
@@ -170,56 +176,47 @@
       }
     });
 
-    // Odhlášení
-    document.addEventListener("DOMContentLoaded", () => {
-      const logoutBtn = document.getElementById("logoutBtn");
-      if (logoutBtn) {
-        logoutBtn.addEventListener("click", () => {
-          localStorage.removeItem("userLoggedIn");
-          window.location.href = "login.html";
+    // Tipy toggle
+    document.querySelectorAll('.tip-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const content = btn.nextElementSibling;
+        document.querySelectorAll('.tip-content').forEach(c => {
+          if (c !== content) c.style.display = 'none';
         });
-      }
-    });
-
-    // Tipy rozbalovací
-    document.querySelectorAll(".tip-toggle").forEach(toggle => {
-      toggle.addEventListener("click", () => {
-        const content = toggle.nextElementSibling;
-        const allContents = document.querySelectorAll(".tip-content");
-        allContents.forEach(el => {
-          if (el !== content) el.style.display = "none";
-        });
-        content.style.display = content.style.display === "block" ? "none" : "block";
+        content.style.display = content.style.display === 'block' ? 'none' : 'block';
       });
     });
 
-    // Graf
-    document.addEventListener("DOMContentLoaded", function () {
-      const ctx = document.getElementById('myChart').getContext('2d');
-      new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: ['Příjmy', 'Výdaje'],
-          datasets: [{
-            label: 'Kč',
-            data: [12000, 7800],
-            backgroundColor: ['#4CAF50', '#F44336'],
-            borderRadius: 8
-          }]
-        },
-        options: {
-          responsive: true,
-          plugins: {
-            legend: { display: false }
-          },
-          scales: {
-            y: {
-              beginAtZero: true,
-              ticks: { stepSize: 1000 }
-            }
+    // Přepnutí režimu
+    document.getElementById('toggleTheme').addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+    });
+
+    // Vykreslení grafu
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const prijmy = localStorage.getItem("prijmy") || 12000;
+    const vydaje = localStorage.getItem("vydaje") || 7800;
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Příjmy', 'Výdaje'],
+        datasets: [{
+          label: 'Přehled (Kč)',
+          data: [prijmy, vydaje],
+          backgroundColor: ['#4CAF50', '#F44336'],
+          borderRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false }},
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: { stepSize: 1000 }
           }
         }
-      });
+      }
     });
   </script>
 </body>
