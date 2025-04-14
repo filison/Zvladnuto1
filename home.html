@@ -5,88 +5,90 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Domů – Zvládnu to</title>
   <style>
-    body {
-      margin: 0;
-      padding: 20px;
-      font-family: "Segoe UI", sans-serif;
-      background: linear-gradient(to bottom right, #d1f2eb, #a3e4d7);
-    }
+  body {
+    margin: 0;
+    padding: 20px;
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(to bottom right, #d1f2eb, #a3e4d7);
+  }
 
+  .container {
+    max-width: 480px;
+    margin: auto;
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  }
+
+  h2 {
+    margin-top: 0;
+    color: #2c3e50;
+    font-size: 20px;
+  }
+
+  .logout-btn {
+    float: right;
+    background-color: transparent;
+    color: #e74c3c;
+    border: 1px solid #e74c3c;
+    padding: 6px 10px;
+    font-size: 13px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  canvas {
+    margin: 20px 0;
+    background: #f8f9f9;
+    border-radius: 8px;
+    padding: 5px;
+  }
+
+  .tip-section {
+    margin-top: 15px;
+  }
+
+  .tip-toggle {
+    width: 100%;
+    background-color: white;
+    border: 1px solid #3498db;
+    color: #3498db;
+    padding: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+  }
+
+  .tip-toggle:hover {
+    background-color: #ecf0f1;
+  }
+
+  .tip-content {
+    display: none;
+    background: #ecf0f1;
+    padding: 8px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    color: #2c3e50;
+    font-size: 14px;
+  }
+
+  @media (max-width: 500px) {
     .container {
-      max-width: 480px;
-      margin: auto;
-      background: white;
-      padding: 20px;
-      border-radius: 16px;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-    }
-
-    h2 {
-      margin-top: 0;
-      color: #2c3e50;
+      padding: 12px;
     }
 
     .logout-btn {
-      float: right;
-      background-color: #e74c3c;
-      color: white;
-      border: none;
-      padding: 8px 14px;
-      font-size: 14px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    canvas {
-      margin: 20px 0;
-      background: #f8f9f9;
-      border-radius: 10px;
-      padding: 10px;
-    }
-
-    .tip-section {
-      margin-top: 20px;
-    }
-
-    .tip-toggle {
+      float: none;
+      display: block;
       width: 100%;
-      background-color: transparent;
-      border: 1px solid #3498db;
-      color: #3498db;
-      padding: 10px;
-      font-size: 16px;
-      cursor: pointer;
-      margin-bottom: 10px;
-      border-radius: 8px;
-      transition: background-color 0.2s;
+      margin-bottom: 15px;
     }
-
-    .tip-toggle:hover {
-      background-color: #ecf0f1;
-    }
-
-    .tip-content {
-      display: none;
-      background: #ecf0f1;
-      padding: 10px;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      color: #2c3e50;
-    }
-
-    @media (max-width: 500px) {
-      .container {
-        padding: 15px;
-      }
-
-      .logout-btn {
-        float: none;
-        display: block;
-        width: 100%;
-        margin-bottom: 15px;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
   <div class="container">
