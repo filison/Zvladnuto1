@@ -5,125 +5,221 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Zvládnu to – Domů</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom right, #d4fc79, #96e6a1);
       margin: 0;
-      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f4f4;
+      color: #333;
     }
-    .container {
-      max-width: 480px;
-      margin: 0 auto;
-      padding: 20px;
-      background: #fff;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      margin-top: 20px;
-    }
-    h1, h2 {
-      text-align: center;
-      color: #222;
-    }
-    .logout-btn {
-      background-color: #e74c3c;
+
+    header {
+      background: #247ba0;
       color: white;
-      border: none;
-      padding: 12px;
-      width: 100%;
-      border-radius: 10px;
-      font-size: 16px;
-      margin-bottom: 20px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      margin-top: 40px;
+      margin-bottom: 15px;
+    }
+
+    /* Rozcestník */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+    }
+
+    .tile {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 15px;
+      font-weight: bold;
+      color: #247ba0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.2s, background-color 0.3s;
       cursor: pointer;
     }
-    .grid-menu {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-      margin-bottom: 30px;
+
+    .tile:hover {
+      transform: scale(1.05);
+      background-color: #e6f7ff;
     }
-    .tile {
-      background-color: #f2f2f2;
-      border-radius: 12px;
-      padding: 20px;
-      text-align: center;
+
+    .tile i {
+      font-size: 26px;
+      margin-bottom: 10px;
+      color: #247ba0;
+    }
+
+    /* Tipy */
+    .tip {
+      background: white;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .tip-toggle {
+      padding: 15px;
       font-weight: bold;
       cursor: pointer;
-      transition: all 0.2s ease;
+      background: #e8f6f9;
+      border-radius: 8px 8px 0 0;
     }
-    .tile:hover {
-      background-color: #e0e0e0;
+
+    .tip-content {
+      display: none;
+      padding: 15px;
+      border-top: 1px solid #ddd;
     }
-    canvas {
+
+    /* Graf */
+    #myChart {
       max-width: 100%;
+      margin-top: 30px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-    .tipy button {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
+
+    #logoutBtn {
+      margin-top: 20px;
+      background: #f44336;
+      color: white;
+      border: none;
+      padding: 10px 20px;
       border-radius: 8px;
-      border: 2px solid #3498db;
-      background-color: white;
-      color: #3498db;
-      font-size: 16px;
       cursor: pointer;
     }
-    .tipy button:hover {
-      background-color: #ecf9ff;
+
+    #logoutBtn:hover {
+      background: #d32f2f;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <button class="logout-btn" onclick="logout()">Odhlásit se</button>
-    <h1>Zvládnu to</h1>
+  <header>
+    <h1>Vítej zpět ve Zvládnu to!</h1>
+  </header>
 
-    <div class="grid-menu">
-      <div class="tile">Přehled</div>
-      <div class="tile">Chytrý pomocník</div>
-      <div class="tile">Nákupy</div>
-      <div class="tile">Smlouvy</div>
+  <div class="container">
+    <button id="logoutBtn">Odhlásit se</button>
+
+    <h2>Rozcestník</h2>
+    <div class="grid">
+      <div class="tile" onclick="alert('Chytrý pomocník zatím není aktivní')">
+        <i class="fas fa-robot"></i><br>Chytrý pomocník
+      </div>
+      <div class="tile" onclick="alert('Rozpočet')">
+        <i class="fas fa-wallet"></i><br>Můj rozpočet
+      </div>
+      <div class="tile" onclick="alert('Nákupy')">
+        <i class="fas fa-shopping-cart"></i><br>Nákupy
+      </div>
+      <div class="tile" onclick="alert('Recepty')">
+        <i class="fas fa-utensils"></i><br>Recepty
+      </div>
+      <div class="tile" onclick="alert('Tarify')">
+        <i class="fas fa-bolt"></i><br>Srovnání tarifů
+      </div>
+      <div class="tile" onclick="alert('Prodej doma')">
+        <i class="fas fa-box-open"></i><br>Prodej doma
+      </div>
     </div>
 
-    <h2>Přehled financí</h2>
-    <canvas id="myChart"></canvas>
+    <h2>Přehled</h2>
+    <canvas id="myChart" height="150"></canvas>
 
     <h2>Tipy na úsporu</h2>
-    <div class="tipy">
-      <button onclick="alert('Zkuste plánovat jídla dopředu a nakupujte podle seznamu.')">Zobrazit tip 1</button>
-      <button onclick="alert('Zkontrolujte své předplatné a zrušte ta, která nepoužíváte.')">Zobrazit tip 2</button>
-      <button onclick="alert('Porovnávejte ceny energií a operátorů jednou ročně.')">Zobrazit tip 3</button>
+
+    <div class="tip">
+      <div class="tip-toggle">1. Sleduj akce v supermarketech</div>
+      <div class="tip-content">Pravidelně sleduj letáky a srovnávej ceny v různých obchodech. Můžeš ušetřit stovky měsíčně.</div>
+    </div>
+
+    <div class="tip">
+      <div class="tip-toggle">2. Omez zbytečné předplatné</div>
+      <div class="tip-content">Zkontroluj, za co platíš pravidelně – některé služby možná ani nepoužíváš.</div>
+    </div>
+
+    <div class="tip">
+      <div class="tip-toggle">3. Plánuj jídla dopředu</div>
+      <div class="tip-content">Pomáhá to omezit impulzivní nákupy a zbytečné vyhazování jídla.</div>
     </div>
   </div>
 
   <script>
-    function logout() {
-      localStorage.removeItem("user");
-      window.location.href = "index.html";
-    }
+    // Ověření přihlášení
+    document.addEventListener("DOMContentLoaded", () => {
+      const userLoggedIn = localStorage.getItem("userLoggedIn");
+      if (!userLoggedIn) {
+        window.location.href = "login.html";
+      }
+    });
 
-    const ctx = document.getElementById('myChart').getContext('2d');
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Příjmy', 'Výdaje'],
-        datasets: [{
-          label: 'Kč',
-          data: [12000, 7000],
-          backgroundColor: ['#2ecc71', '#e74c3c']
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false }
+    // Odhlášení
+    document.addEventListener("DOMContentLoaded", () => {
+      const logoutBtn = document.getElementById("logoutBtn");
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+          localStorage.removeItem("userLoggedIn");
+          window.location.href = "login.html";
+        });
+      }
+    });
+
+    // Tipy rozbalovací
+    document.querySelectorAll(".tip-toggle").forEach(toggle => {
+      toggle.addEventListener("click", () => {
+        const content = toggle.nextElementSibling;
+        const allContents = document.querySelectorAll(".tip-content");
+        allContents.forEach(el => {
+          if (el !== content) el.style.display = "none";
+        });
+        content.style.display = content.style.display === "block" ? "none" : "block";
+      });
+    });
+
+    // Graf
+    document.addEventListener("DOMContentLoaded", function () {
+      const ctx = document.getElementById('myChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Příjmy', 'Výdaje'],
+          datasets: [{
+            label: 'Kč',
+            data: [12000, 7800],
+            backgroundColor: ['#4CAF50', '#F44336'],
+            borderRadius: 8
+          }]
         },
-        scales: {
-          y: {
-            beginAtZero: true
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: { stepSize: 1000 }
+            }
           }
         }
-      }
+      });
     });
   </script>
 </body>
