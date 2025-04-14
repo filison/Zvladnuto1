@@ -3,66 +3,63 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Domů – Zvládnu to</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>Zvládnu to – Domů</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
       background: linear-gradient(135deg, #70c1b3, #247ba0);
+      margin: 0;
       color: white;
-      min-height: 100vh;
     }
 
     .container {
-      max-width: 960px;
-      margin: auto;
       padding: 30px 20px;
+      max-width: 800px;
+      margin: auto;
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 10px;
+      font-size: 28px;
+      margin-bottom: 20px;
     }
 
-    #toggleTheme {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      padding: 10px 15px;
-      background: #fff;
-      color: #247ba0;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .tiles {
+    .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 20px;
-      margin: 30px 0;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 15px;
+      margin-bottom: 40px;
     }
 
     .tile {
-      background: rgba(255,255,255,0.15);
-      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border-radius: 10px;
+      padding: 15px;
       text-align: center;
-      padding: 20px;
       cursor: pointer;
-      transition: all 0.3s;
+      transition: 0.3s;
     }
 
     .tile:hover {
-      background: rgba(255,255,255,0.25);
+      background: rgba(255, 255, 255, 0.2);
     }
 
-    .tile i {
-      font-size: 28px;
-      margin-bottom: 10px;
+    .tile a {
+      text-decoration: none;
+      color: white;
       display: block;
+    }
+
+    canvas {
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .tips {
+      margin-top: 40px;
     }
 
     .tip {
@@ -70,153 +67,124 @@
     }
 
     .tip-toggle {
-      background: rgba(255,255,255,0.1);
+      background: rgba(255, 255, 255, 0.1);
       padding: 10px;
-      border: none;
-      color: white;
-      width: 100%;
-      text-align: left;
+      border-radius: 5px;
       cursor: pointer;
-      border-radius: 8px;
+      font-weight: bold;
     }
 
     .tip-content {
       display: none;
-      background: rgba(255,255,255,0.05);
       padding: 10px;
-      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 5px;
       margin-top: 5px;
     }
 
-    #myChart {
+    #logoutBtn {
+      display: block;
+      margin: 30px auto 0;
       background: white;
-      border-radius: 10px;
-      padding: 15px;
-    }
-
-    .top-icons {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      font-size: 22px;
-    }
-
-    .top-icons i {
-      margin-left: 15px;
+      color: #247ba0;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 6px;
       cursor: pointer;
+      border: none;
     }
 
-    /* Dark mode */
-    body.dark-mode {
-      background: #121212;
-      color: #f0f0f0;
-    }
-
-    body.dark-mode .tile {
-      background: #1e1e1e;
-      color: #eee;
-    }
-
-    body.dark-mode .tile:hover {
-      background: #2e2e2e;
-    }
-
-    body.dark-mode .tip-toggle {
-      background: #2a2a2a;
-    }
-
-    body.dark-mode .tip-content {
-      background: #1b1b1b;
-    }
-
-    body.dark-mode #myChart {
-      background: #fff;
-    }
   </style>
 </head>
 <body>
-  <div class="top-icons">
-    <i class="fas fa-bell" onclick="alert('Žádné nové notifikace')"></i>
-    <i class="fas fa-user-circle" onclick="window.location.href='profil.html'"></i>
-  </div>
-
   <div class="container">
-    <h1>Vítej zpět, zvládneš to!</h1>
+    <h1>Vítej zpět!</h1>
 
-    <canvas id="myChart"></canvas>
-
-    <div class="tiles">
-      <div class="tile" onclick="location.href='pomocnik.html'"><i class="fas fa-robot"></i>Chytrý pomocník</div>
-      <div class="tile" onclick="location.href='rozpocet.html'"><i class="fas fa-wallet"></i>Můj rozpočet</div>
-      <div class="tile" onclick="location.href='nakupy.html'"><i class="fas fa-shopping-cart"></i>Nákupy a slevy</div>
-      <div class="tile" onclick="location.href='recepty.html'"><i class="fas fa-utensils"></i>Levné recepty</div>
-      <div class="tile" onclick="location.href='tarify.html'"><i class="fas fa-bolt"></i>Srovnávač tarifů</div>
-      <div class="tile" onclick="location.href='prodej.html'"><i class="fas fa-box-open"></i>Co můžu prodat</div>
+    <div class="grid">
+      <div class="tile"><a href="pomocnik.html">Pomocník</a></div>
+      <div class="tile"><a href="rozpocet.html">Rozpočet</a></div>
+      <div class="tile"><a href="nakupy.html">Nákupy</a></div>
+      <div class="tile"><a href="recepty.html">Recepty</a></div>
+      <div class="tile"><a href="tarify.html">Tarify</a></div>
+      <div class="tile"><a href="prodej.html">Prodej</a></div>
+      <div class="tile"><a href="srovnavac.html">Srovnávač</a></div>
+      <div class="tile"><a href="profil.html">Profil</a></div>
     </div>
 
-    <div class="tip">
-      <button class="tip-toggle">Tip 1: Vytvoř si rozpočet</button>
-      <div class="tip-content">Zapiš si všechny příjmy a výdaje. Uvidíš, kde lze snadno ušetřit.</div>
+    <canvas id="myChart" width="100%" height="300"></canvas>
+
+    <div class="tips">
+      <div class="tip">
+        <div class="tip-toggle">Jak si lépe hlídat výdaje?</div>
+        <div class="tip-content">Zapiš si pravidelně každý výdaj a využívej chytrého pomocníka pro doporučení úspor.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-toggle">Kde nejčastěji zbytečně utrácíme?</div>
+        <div class="tip-content">Nejčastěji to bývá jídlo z restaurací, předražené tarify a impulzivní nákupy.</div>
+      </div>
     </div>
 
-    <div class="tip">
-      <button class="tip-toggle">Tip 2: Sleduj slevy</button>
-      <div class="tip-content">Využívej akce a plánuj nákupy podle letáků. Můžeš ušetřit stovky měsíčně.</div>
-    </div>
+    <button id="logoutBtn">Odhlásit se</button>
   </div>
 
-  <button id="toggleTheme">Přepnout režim</button>
-
+  <!-- Firebase Auth Check -->
   <script>
-    // Ověření přihlášení
     document.addEventListener("DOMContentLoaded", () => {
       const userLoggedIn = localStorage.getItem("userLoggedIn");
       if (!userLoggedIn) {
         window.location.href = "login.html";
       }
-    });
 
-    // Tipy toggle
-    document.querySelectorAll('.tip-toggle').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const content = btn.nextElementSibling;
-        document.querySelectorAll('.tip-content').forEach(c => {
-          if (c !== content) c.style.display = 'none';
+      // Logout
+      const logoutBtn = document.getElementById("logoutBtn");
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+          localStorage.removeItem("userLoggedIn");
+          window.location.href = "login.html";
         });
-        content.style.display = content.style.display === 'block' ? 'none' : 'block';
+      }
+
+      // Tip toggle
+      const toggles = document.querySelectorAll('.tip-toggle');
+      toggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+          const content = toggle.nextElementSibling;
+          const isOpen = content.style.display === 'block';
+
+          document.querySelectorAll('.tip-content').forEach(c => c.style.display = 'none');
+          content.style.display = isOpen ? 'none' : 'block';
+        });
       });
     });
+  </script>
 
-    // Přepnutí režimu
-    document.getElementById('toggleTheme').addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-    });
-
-    // Vykreslení grafu
-    const ctx = document.getElementById('myChart').getContext('2d');
-    const prijmy = localStorage.getItem("prijmy") || 12000;
-    const vydaje = localStorage.getItem("vydaje") || 7800;
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Příjmy', 'Výdaje'],
-        datasets: [{
-          label: 'Přehled (Kč)',
-          data: [prijmy, vydaje],
-          backgroundColor: ['#4CAF50', '#F44336'],
-          borderRadius: 8
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: { legend: { display: false }},
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: { stepSize: 1000 }
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const ctx = document.getElementById('myChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Příjmy', 'Výdaje'],
+          datasets: [{
+            label: 'Přehled (Kč)',
+            data: [12500, 7600],
+            backgroundColor: ['#4CAF50', '#F44336'],
+            borderRadius: 10
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: { stepSize: 1000 }
+            }
           }
         }
-      }
+      });
     });
   </script>
 </body>
