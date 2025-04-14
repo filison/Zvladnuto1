@@ -6,75 +6,91 @@
   <title>Domů – Zvládnu to</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #70c1b3, #247ba0);
       margin: 0;
       padding: 20px;
-      color: white;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(to bottom right, #d1f2eb, #a3e4d7);
     }
 
     .container {
-      max-width: 600px;
+      max-width: 480px;
       margin: auto;
-      background: rgba(255, 255, 255, 0.1);
+      background: white;
       padding: 20px;
-      border-radius: 12px;
-      backdrop-filter: blur(8px);
+      border-radius: 16px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
     }
 
     h2 {
       margin-top: 0;
+      color: #2c3e50;
+    }
+
+    .logout-btn {
+      float: right;
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      font-size: 14px;
+      border-radius: 6px;
+      cursor: pointer;
     }
 
     canvas {
-      background: white;
+      margin: 20px 0;
+      background: #f8f9f9;
       border-radius: 10px;
       padding: 10px;
     }
 
     .tip-section {
-      margin-top: 30px;
+      margin-top: 20px;
     }
 
     .tip-toggle {
-      display: block;
       width: 100%;
-      text-align: left;
-      margin-top: 10px;
+      background-color: transparent;
+      border: 1px solid #3498db;
+      color: #3498db;
       padding: 10px;
-      background-color: #ffffff33;
-      border: none;
-      color: white;
       font-size: 16px;
       cursor: pointer;
-      border-radius: 6px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      transition: background-color 0.2s;
+    }
+
+    .tip-toggle:hover {
+      background-color: #ecf0f1;
     }
 
     .tip-content {
       display: none;
-      background: #ffffff22;
-      margin-top: 5px;
+      background: #ecf0f1;
       padding: 10px;
-      border-radius: 6px;
-      color: #f0f0f0;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      color: #2c3e50;
     }
 
-    #logoutBtn {
-      background-color: #f44336;
-      border: none;
-      color: white;
-      padding: 10px 15px;
-      font-size: 14px;
-      cursor: pointer;
-      border-radius: 6px;
-      float: right;
-      margin-bottom: 20px;
+    @media (max-width: 500px) {
+      .container {
+        padding: 15px;
+      }
+
+      .logout-btn {
+        float: none;
+        display: block;
+        width: 100%;
+        margin-bottom: 15px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <button id="logoutBtn">Odhlásit se</button>
+    <button class="logout-btn" id="logoutBtn">Odhlásit se</button>
     <h2>Přehled financí</h2>
     <canvas id="myChart" width="400" height="200"></canvas>
 
@@ -91,10 +107,7 @@
     </div>
   </div>
 
-  <!-- Chart.js knihovna -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-  <!-- Logika aplikace -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
@@ -111,33 +124,42 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    // Ověření přihlášení
     onAuthStateChanged(auth, (user) => {
       if (!user) {
         window.location.href = "login.html";
       }
     });
 
-    // Odhlášení
     const logoutBtn = document.getElementById("logoutBtn");
     logoutBtn.addEventListener("click", () => {
       signOut(auth).then(() => {
-        localStorage.removeItem("userLoggedIn");
         window.location.href = "login.html";
       });
     });
 
-    // Graf
+    // Tipy na úsporu – rozbalování
+    document.querySelectorAll(".tip-toggle").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const content = btn.nextElementSibling;
+        const all = document.querySelectorAll(".tip-content");
+        all.forEach((el) => {
+          if (el !== content) el.style.display = "none";
+        });
+        content.style.display = content.style.display === "block" ? "none" : "block";
+      });
+    });
+
+    // Chart.js graf
     const ctx = document.getElementById("myChart").getContext("2d");
     new Chart(ctx, {
       type: "bar",
       data: {
         labels: ["Příjmy", "Výdaje"],
         datasets: [{
-          label: "Přehled (Kč)",
+          label: "Finance",
           data: [12000, 7800],
-          backgroundColor: ["#4CAF50", "#F44336"],
-          borderRadius: 8
+          backgroundColor: ["#27ae60", "#c0392b"],
+          borderRadius: 10
         }]
       },
       options: {
@@ -147,23 +169,10 @@
         },
         scales: {
           y: {
-            beginAtZero: true,
-            ticks: { stepSize: 1000 }
+            beginAtZero: true
           }
         }
       }
-    });
-
-    // Rozbalovací tipy
-    const buttons = document.querySelectorAll(".tip-toggle");
-    buttons.forEach(button => {
-      button.addEventListener("click", () => {
-        const content = button.nextElementSibling;
-        document.querySelectorAll(".tip-content").forEach(el => {
-          if (el !== content) el.style.display = "none";
-        });
-        content.style.display = content.style.display === "block" ? "none" : "block";
-      });
     });
   </script>
 </body>
