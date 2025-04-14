@@ -86,26 +86,33 @@ section#dashboard {
   font-size: 20px;
 }
 .tip-box {
-  margin: 10px 0;
+  margin: 15px auto;
+  max-width: 90%;
   text-align: center;
 }
 
 .tip-toggle {
-  background-color: #00796b;
+  background-color: #2196f3;
   color: white;
-  padding: 8px 16px;
+  padding: 10px 20px;
   border: none;
-  border-radius: 20px;
+  border-radius: 10px;
   font-weight: bold;
   cursor: pointer;
-  margin-bottom: 5px;
+  width: 100%;
 }
 
 .tip-content {
   display: none;
-  background-color: #1e1e1e;
+  background-color: #333;
   color: white;
   padding: 10px;
   margin-top: 5px;
-  border-radius: 10px;
+  border-radius: 8px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
