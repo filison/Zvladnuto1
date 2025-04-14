@@ -1,51 +1,34 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <title>Zvládnu to – Přihlášení / Registrace</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zvládnu to – Registrace</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 40px;
-      background-color: #f7f7f7;
-    }
-    .container {
-      max-width: 400px;
-      margin: auto;
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    input, button {
-      width: 100%;
-      margin-top: 10px;
-      padding: 10px;
-      font-size: 16px;
-    }
-    button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-    }
-    h2 {
-      text-align: center;
-    }
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f0f0; }
+    form { max-width: 300px; margin: auto; background: white; padding: 20px; border-radius: 8px; }
+    input { display: block; margin-bottom: 15px; padding: 10px; width: 100%; }
+    button { padding: 10px; width: 100%; background: #2a8bff; color: white; border: none; border-radius: 5px; }
+    .message { text-align: center; margin-top: 15px; color: green; }
+    .link { text-align: center; margin-top: 10px; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Přihlášení / Registrace</h2>
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="password" placeholder="Heslo">
-    <button onclick="login()">Přihlásit se</button>
-    <button onclick="register()">Registrovat se</button>
+  <h2>Registrace</h2>
+  <form id="registerForm">
+    <input type="email" id="email" placeholder="Email" required />
+    <input type="password" id="password" placeholder="Heslo" required />
+    <button type="submit">Registrovat se</button>
+    <div class="message" id="message"></div>
+  </form>
+  <div class="link">
+    Už máte účet? <a href="login.html">Přihlaste se</a>
   </div>
 
-  <!-- Firebase -->
+  <!-- Firebase + JS -->
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyAcg0qqzWJwkxmopkTgzfasMqd3siQNxIU",
@@ -60,33 +43,23 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    window.register = function () {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+    const form = document.getElementById('registerForm');
+    const message = document.getElementById('message');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
 
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-          alert("Registrace úspěšná!");
-          window.location.href = "home.html";
+          message.innerText = "Registrace úspěšná! Nyní se můžete přihlásit.";
+          form.reset();
         })
         .catch((error) => {
-          alert("Chyba při registraci: " + error.message);
+          message.innerText = `Chyba: ${error.message}`;
         });
-    }
-
-    window.login = function () {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-
-      signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          alert("Přihlášení úspěšné!");
-          window.location.href = "home.html";
-        })
-        .catch((error) => {
-          alert("Chyba při přihlášení: " + error.message);
-        });
-    }
+    });
   </script>
 </body>
 </html>
