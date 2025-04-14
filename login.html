@@ -105,19 +105,22 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    function login() {
-      const email = document.getElementById("loginEmail").value;
-      const password = document.getElementById("loginPassword").value;
+   function login() {
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
 
-      signInWithEmailAndPassword(auth, email, password)
-        .then(() => {
-          alert("Přihlášení úspěšné!");
-          window.location.href = "home.html";
-        })
-        .catch((error) => {
-          alert("Chyba: " + error.message);
-        });
-    }
+  signInWithEmailAndPassword(auth, email, password)
+    .then(() => {
+      // Uložení do localStorage
+      localStorage.setItem("userLoggedIn", "true");
+
+      alert("Přihlášení úspěšné!");
+      window.location.href = "home.html";
+    })
+    .catch((error) => {
+      alert("Chyba: " + error.message);
+    });
+}
 
     window.login = login;
   </script>
