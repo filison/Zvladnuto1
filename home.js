@@ -1,5 +1,6 @@
-// Odhlášení
+// Po načtení stránky
 document.addEventListener("DOMContentLoaded", function () {
+  // Odhlášení uživatele
   const logoutBtn = document.getElementById("logoutBtn");
   if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
@@ -8,20 +9,21 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Funkce pro rozbalování tipů
+  // Rozbalovací tipy
   const buttons = document.querySelectorAll(".tip-toggle");
 
   buttons.forEach(button => {
     button.addEventListener("click", () => {
       const content = button.nextElementSibling;
+      const isVisible = content.style.display === "block";
 
-      // Zavřít ostatní
+      // Zavřít všechny ostatní
       document.querySelectorAll(".tip-content").forEach(el => {
         if (el !== content) el.style.display = "none";
       });
 
-      // Přepnout aktuální
-      content.style.display = content.style.display === "block" ? "none" : "block";
+      // Přepnout viditelnost u kliknutého
+      content.style.display = isVisible ? "none" : "block";
     });
   });
 });
