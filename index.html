@@ -78,6 +78,15 @@
         .catch((error) => {
           alert("Chyba při přihlášení: " + error.message);
         });
+        
+        login(email, password)
+  .then(() => {
+    alert("Přihlášení úspěšné!");
+    window.location.href = "home.html"; // přesměrování
+  })
+  .catch((error) => {
+    alert("Chyba při přihlášení: " + error.message);
+  });
     };
   </script>
 </body>
