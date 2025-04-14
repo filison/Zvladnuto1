@@ -1,49 +1,31 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Zvládnu to – Domů</title>
-  <style>
-    body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 40px; text-align: center; }
-    h1 { color: #2a8bff; }
-    button { margin-top: 20px; padding: 10px 20px; background: #ff5c5c; color: white; border: none; border-radius: 5px; cursor: pointer; }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Vítejte v aplikaci Zvládnu to!</h1>
-  <p>Jste úspěšně přihlášeni.</p>
-  <button id="logout">Odhlásit se</button>
+  <header>
+    <h1>Vítej zpět!</h1>
+    <nav>
+      <ul>
+        <li><a href="#" id="dashboardLink">Přehled</a></li>
+        <li><a href="#" id="helperLink">Chytrý pomocník</a></li>
+        <li><a href="#" id="profileLink">Můj profil</a></li>
+        <li><a href="#" id="logoutBtn">Odhlásit se</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
+  <main>
+    <section id="dashboard">
+      <h2>Přehled</h2>
+      <p>Tady budeš mít přehled o svých financích a doporučeních.</p>
+    </section>
+  </main>
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyAcg0qqzWJwkxmopkTgzfasMqd3siQNxIU",
-      authDomain: "zvladnuto-4e6cb.firebaseapp.com",
-      projectId: "zvladnuto-4e6cb",
-      storageBucket: "zvladnuto-4e6cb.appspot.com",
-      messagingSenderId: "299881468872",
-      appId: "1:299881468872:web:8c36e215cf40a91748e6fd",
-      measurementId: "G-HZZG7JRYCC"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    // Zkontroluj, jestli je uživatel přihlášen
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        window.location.href = "login.html"; // přesměrování pokud není přihlášen
-      }
-    });
-
-    document.getElementById("logout").addEventListener("click", () => {
-      signOut(auth).then(() => {
-        window.location.href = "login.html";
-      });
-    });
-  </script>
+  <script src="home.js"></script>
 </body>
 </html>
