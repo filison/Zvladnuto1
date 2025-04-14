@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zvládnu to – Domů</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+      color: #333;
+    }
+
+    header {
+      background-color: #009688;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .welcome {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .cards {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .card h3 {
+      margin-top: 0;
+    }
+
+    .card button {
+      background-color: #009688;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .card button:hover {
+      background-color: #00796b;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #eee;
+      color: #666;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Zvládnu to</h1>
+    <nav>
+      <a href="home.html">Domů</a>
+      <a href="index.html">Odhlásit se</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="welcome">
+      <h2>Vítej zpět!</h2>
+      <p>Jsme rádi, že se vracíš. Tady začíná tvoje cesta k jistotě.</p>
+    </section>
+
+    <section class="cards">
+      <div class="card">
+        <h3>Chytrý finanční poradce</h3>
+        <p>Podívej se, jak ušetřit ještě tento měsíc. Vše přehledně a lidsky.</p>
+        <button onclick="goToHelper()">Spustit poradce</button>
+      </div>
+
+      <div class="card">
+        <h3>Přehled výdajů</h3>
+        <p>Jednoduchý přehled toho, za co utrácíš. Bez složitostí.</p>
+        <button onclick="goToOverview()">Zobrazit přehled</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Zvládnu to</p>
+  </footer>
+
+  <script>
+    function goToHelper() {
+      alert("Přesměrování na Chytrého poradce zatím není hotové.");
+      // window.location.href = "helper.html";
+    }
+
+    function goToOverview() {
+      alert("Přehled výdajů bude brzy k dispozici.");
+      // window.location.href = "overview.html";
+    }
+  </script>
+</body>
+</html>
