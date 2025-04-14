@@ -1,43 +1,52 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Zvládnu to – Přihlášení / Registrace</title>
   <style>
     body {
-      font-family: sans-serif;
-      background-color: #f2f2f2;
-      padding: 30px;
-      text-align: center;
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #f7f7f7;
     }
-    input {
+    .container {
+      max-width: 400px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, button {
+      width: 100%;
+      margin-top: 10px;
       padding: 10px;
-      margin: 10px;
-      width: 80%;
-      max-width: 300px;
+      font-size: 16px;
     }
     button {
-      padding: 10px 20px;
-      margin: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+    }
+    h2 {
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <h1>Zvládnu to</h1>
-  <input type="email" id="email" placeholder="E-mail" />
-  <input type="password" id="password" placeholder="Heslo" />
-  <br />
-  <button onclick="register()">Registrace</button>
-  <button onclick="login()">Přihlášení</button>
+  <div class="container">
+    <h2>Přihlášení / Registrace</h2>
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Heslo">
+    <button onclick="login()">Přihlásit se</button>
+    <button onclick="register()">Registrovat se</button>
+  </div>
 
-  <!-- Firebase SDK -->
+  <!-- Firebase -->
   <script type="module">
-    // Firebase importy
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 
-    // Konfigurace Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyAcg0qqzWJwkxmopkTgzfasMqd3siQNxIU",
       authDomain: "zvladnuto-4e6cb.firebaseapp.com",
@@ -48,11 +57,9 @@
       measurementId: "G-HZZG7JRYCC"
     };
 
-    // Inicializace
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    // Funkce registrace
     window.register = function () {
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
@@ -60,13 +67,13 @@
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           alert("Registrace úspěšná!");
+          window.location.href = "dashboard.html";
         })
         .catch((error) => {
           alert("Chyba při registraci: " + error.message);
         });
-    };
+    }
 
-    // Funkce přihlášení
     window.login = function () {
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
@@ -74,20 +81,12 @@
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           alert("Přihlášení úspěšné!");
+          window.location.href = "dashboard.html";
         })
         .catch((error) => {
           alert("Chyba při přihlášení: " + error.message);
         });
-        
-        login(email, password)
-  .then(() => {
-    alert("Přihlášení úspěšné!");
-    window.location.href = "home.html"; // přesměrování
-  })
-  .catch((error) => {
-    alert("Chyba při přihlášení: " + error.message);
-  });
-    };
+    }
   </script>
 </body>
 </html>
