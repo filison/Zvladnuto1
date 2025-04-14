@@ -67,7 +67,7 @@
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           alert("Registrace úspěšná!");
-          window.location.href = "dashboard.html";
+          window.location.href = "home.html";
         })
         .catch((error) => {
           alert("Chyba při registraci: " + error.message);
@@ -81,7 +81,7 @@
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           alert("Přihlášení úspěšné!");
-          window.location.href = "dashboard.html";
+          window.location.href = "home.html";
         })
         .catch((error) => {
           alert("Chyba při přihlášení: " + error.message);
