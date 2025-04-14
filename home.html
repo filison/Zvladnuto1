@@ -2,166 +2,115 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Domů – Zvládnu to</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zvládnu to – Domů</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-  body {
-    margin: 0;
-    padding: 20px;
-    font-family: "Segoe UI", sans-serif;
-    background: linear-gradient(to bottom right, #d1f2eb, #a3e4d7);
-  }
-
-  .container {
-    max-width: 480px;
-    margin: auto;
-    background: white;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-  }
-
-  h2 {
-    margin-top: 0;
-    color: #2c3e50;
-    font-size: 20px;
-  }
-
-  .logout-btn {
-    float: right;
-    background-color: transparent;
-    color: #e74c3c;
-    border: 1px solid #e74c3c;
-    padding: 6px 10px;
-    font-size: 13px;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-
-  canvas {
-    margin: 20px 0;
-    background: #f8f9f9;
-    border-radius: 8px;
-    padding: 5px;
-  }
-
-  .tip-section {
-    margin-top: 15px;
-  }
-
-  .tip-toggle {
-    width: 100%;
-    background-color: white;
-    border: 1px solid #3498db;
-    color: #3498db;
-    padding: 8px;
-    font-size: 14px;
-    cursor: pointer;
-    margin-bottom: 8px;
-    border-radius: 6px;
-    transition: background-color 0.2s;
-  }
-
-  .tip-toggle:hover {
-    background-color: #ecf0f1;
-  }
-
-  .tip-content {
-    display: none;
-    background: #ecf0f1;
-    padding: 8px;
-    border-radius: 6px;
-    margin-bottom: 8px;
-    color: #2c3e50;
-    font-size: 14px;
-  }
-
-  @media (max-width: 500px) {
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #d4fc79, #96e6a1);
+      margin: 0;
+      padding: 0;
+    }
     .container {
-      padding: 12px;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-top: 20px;
     }
-
+    h1, h2 {
+      text-align: center;
+      color: #222;
+    }
     .logout-btn {
-      float: none;
-      display: block;
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 12px;
       width: 100%;
-      margin-bottom: 15px;
+      border-radius: 10px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      cursor: pointer;
     }
-  }
-</style>
+    .grid-menu {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    .tile {
+      background-color: #f2f2f2;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .tile:hover {
+      background-color: #e0e0e0;
+    }
+    canvas {
+      max-width: 100%;
+    }
+    .tipy button {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: 2px solid #3498db;
+      background-color: white;
+      color: #3498db;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .tipy button:hover {
+      background-color: #ecf9ff;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <button class="logout-btn" id="logoutBtn">Odhlásit se</button>
+    <button class="logout-btn" onclick="logout()">Odhlásit se</button>
+    <h1>Zvládnu to</h1>
+
+    <div class="grid-menu">
+      <div class="tile">Přehled</div>
+      <div class="tile">Chytrý pomocník</div>
+      <div class="tile">Nákupy</div>
+      <div class="tile">Smlouvy</div>
+    </div>
+
     <h2>Přehled financí</h2>
-    <canvas id="myChart" width="400" height="200"></canvas>
+    <canvas id="myChart"></canvas>
 
-    <div class="tip-section">
-      <h2>Tipy na úsporu</h2>
-      <button class="tip-toggle">Zobrazit tip 1</button>
-      <div class="tip-content">Zkuste plánovat nákupy dopředu a držte se seznamu.</div>
-
-      <button class="tip-toggle">Zobrazit tip 2</button>
-      <div class="tip-content">Porovnávejte ceny energií nebo tarifů, můžete ušetřit stovky měsíčně.</div>
-
-      <button class="tip-toggle">Zobrazit tip 3</button>
-      <div class="tip-content">Využívejte cashback nebo věrnostní programy při nákupech.</div>
+    <h2>Tipy na úsporu</h2>
+    <div class="tipy">
+      <button onclick="alert('Zkuste plánovat jídla dopředu a nakupujte podle seznamu.')">Zobrazit tip 1</button>
+      <button onclick="alert('Zkontrolujte své předplatné a zrušte ta, která nepoužíváte.')">Zobrazit tip 2</button>
+      <button onclick="alert('Porovnávejte ceny energií a operátorů jednou ročně.')">Zobrazit tip 3</button>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+  <script>
+    function logout() {
+      localStorage.removeItem("user");
+      window.location.href = "index.html";
+    }
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyAcg0qqzWJwkxmopkTgzfasMqd3siQNxIU",
-      authDomain: "zvladnuto-4e6cb.firebaseapp.com",
-      projectId: "zvladnuto-4e6cb",
-      storageBucket: "zvladnuto-4e6cb.appspot.com",
-      messagingSenderId: "299881468872",
-      appId: "1:299881468872:web:8c36e215cf40a91748e6fd",
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        window.location.href = "login.html";
-      }
-    });
-
-    const logoutBtn = document.getElementById("logoutBtn");
-    logoutBtn.addEventListener("click", () => {
-      signOut(auth).then(() => {
-        window.location.href = "login.html";
-      });
-    });
-
-    // Tipy na úsporu – rozbalování
-    document.querySelectorAll(".tip-toggle").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const content = btn.nextElementSibling;
-        const all = document.querySelectorAll(".tip-content");
-        all.forEach((el) => {
-          if (el !== content) el.style.display = "none";
-        });
-        content.style.display = content.style.display === "block" ? "none" : "block";
-      });
-    });
-
-    // Chart.js graf
-    const ctx = document.getElementById("myChart").getContext("2d");
+    const ctx = document.getElementById('myChart').getContext('2d');
     new Chart(ctx, {
-      type: "bar",
+      type: 'bar',
       data: {
-        labels: ["Příjmy", "Výdaje"],
+        labels: ['Příjmy', 'Výdaje'],
         datasets: [{
-          label: "Finance",
-          data: [12000, 7800],
-          backgroundColor: ["#27ae60", "#c0392b"],
-          borderRadius: 10
+          label: 'Kč',
+          data: [12000, 7000],
+          backgroundColor: ['#2ecc71', '#e74c3c']
         }]
       },
       options: {
