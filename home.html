@@ -1,62 +1,170 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zvládnu to – Domů</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Domů – Zvládnu to</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #70c1b3, #247ba0);
+      margin: 0;
+      padding: 20px;
+      color: white;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 12px;
+      backdrop-filter: blur(8px);
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    canvas {
+      background: white;
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    .tip-section {
+      margin-top: 30px;
+    }
+
+    .tip-toggle {
+      display: block;
+      width: 100%;
+      text-align: left;
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #ffffff33;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+
+    .tip-content {
+      display: none;
+      background: #ffffff22;
+      margin-top: 5px;
+      padding: 10px;
+      border-radius: 6px;
+      color: #f0f0f0;
+    }
+
+    #logoutBtn {
+      background-color: #f44336;
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 6px;
+      float: right;
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Vítej zpět!</h1>
-    <nav>
-      <ul>
-        <div id="dashboard">
-          <a href="finance.html"><i class="fas fa-coins"></i> Finanční přehled</a>
-          <a href="chytry-poradce.html"><i class="fas fa-robot"></i> Chytrý poradce</a>
-          <a href="nakup.html"><i class="fas fa-shopping-cart"></i> Nákupní pomocník</a>
-          <a href="premium.html"><i class="fas fa-crown"></i> Prémiový obsah</a>
-          <a href="profil.html"><i class="fas fa-user"></i> Můj profil</a>
-        </div>
-      </ul>
-    </nav>
-  </header>
+  <div class="container">
+    <button id="logoutBtn">Odhlásit se</button>
+    <h2>Přehled financí</h2>
+    <canvas id="myChart" width="400" height="200"></canvas>
 
-  <main>
-    <section id="dashboard">
-      <h2>Přehled</h2>
-      <p>Tady budeš mít přehled o svých financích a doporučeních.</p>
-    </section>
+    <div class="tip-section">
+      <h2>Tipy na úsporu</h2>
+      <button class="tip-toggle">Zobrazit tip 1</button>
+      <div class="tip-content">Zkuste plánovat nákupy dopředu a držte se seznamu.</div>
 
-    <!-- Tipy -->
-    <div class="tip-box">
-      <button class="tip-toggle">Tip na úsporu</button>
-      <div class="tip-content">
-        Omez neplánované nákupy – udělej si nákupní seznam a drž se ho.
-      </div>
+      <button class="tip-toggle">Zobrazit tip 2</button>
+      <div class="tip-content">Porovnávejte ceny energií nebo tarifů, můžete ušetřit stovky měsíčně.</div>
+
+      <button class="tip-toggle">Zobrazit tip 3</button>
+      <div class="tip-content">Využívejte cashback nebo věrnostní programy při nákupech.</div>
     </div>
+  </div>
 
-    <div class="tip-box">
-      <button class="tip-toggle">Levný recept</button>
-      <div class="tip-content">
-        Těstoviny s čočkou a rajčaty – rychlé, zdravé a za pár korun.
-      </div>
-    </div>
+  <!-- Chart.js knihovna -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <div class="tip-box">
-      <button class="tip-toggle">Akční nabídka</button>
-      <div class="tip-content">
-        Rýže Basmati 5kg za 79 Kč v Lidlu – do vyprodání zásob.
-      </div>
-    </div>
-    <section id="finance-chart" class="dashboard-section">
-  <h2>Přehled výdajů a příjmů</h2>
-  <canvas id="myChart" width="300" height="200"></canvas>
-</section>
-  </main>
+  <!-- Logika aplikace -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 
-  <script src="home.js"></script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAcg0qqzWJwkxmopkTgzfasMqd3siQNxIU",
+      authDomain: "zvladnuto-4e6cb.firebaseapp.com",
+      projectId: "zvladnuto-4e6cb",
+      storageBucket: "zvladnuto-4e6cb.appspot.com",
+      messagingSenderId: "299881468872",
+      appId: "1:299881468872:web:8c36e215cf40a91748e6fd",
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Ověření přihlášení
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = "login.html";
+      }
+    });
+
+    // Odhlášení
+    const logoutBtn = document.getElementById("logoutBtn");
+    logoutBtn.addEventListener("click", () => {
+      signOut(auth).then(() => {
+        localStorage.removeItem("userLoggedIn");
+        window.location.href = "login.html";
+      });
+    });
+
+    // Graf
+    const ctx = document.getElementById("myChart").getContext("2d");
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["Příjmy", "Výdaje"],
+        datasets: [{
+          label: "Přehled (Kč)",
+          data: [12000, 7800],
+          backgroundColor: ["#4CAF50", "#F44336"],
+          borderRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: { stepSize: 1000 }
+          }
+        }
+      }
+    });
+
+    // Rozbalovací tipy
+    const buttons = document.querySelectorAll(".tip-toggle");
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        const content = button.nextElementSibling;
+        document.querySelectorAll(".tip-content").forEach(el => {
+          if (el !== content) el.style.display = "none";
+        });
+        content.style.display = content.style.display === "block" ? "none" : "block";
+      });
+    });
+  </script>
 </body>
 </html>
