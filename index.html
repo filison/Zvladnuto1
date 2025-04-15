@@ -1,65 +1,30 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Zvládnu to – Registrace</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f0f0; }
-    form { max-width: 300px; margin: auto; background: white; padding: 20px; border-radius: 8px; }
-    input { display: block; margin-bottom: 15px; padding: 10px; width: 100%; }
-    button { padding: 10px; width: 100%; background: #2a8bff; color: white; border: none; border-radius: 5px; }
-    .message { text-align: center; margin-top: 15px; color: green; }
-    .link { text-align: center; margin-top: 10px; }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Index</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>Registrace</h2>
-  <form id="registerForm">
-    <input type="email" id="email" placeholder="Email" required />
-    <input type="password" id="password" placeholder="Heslo" required />
-    <button type="submit">Registrovat se</button>
-    <div class="message" id="message"></div>
-  </form>
-  <div class="link">
-    Už máte účet? <a href="login.html">Přihlaste se</a>
-  </div>
 
-  <!-- Firebase + JS -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
+<nav id="nav">
+  <a href="home.html">Domů</a>
+  <a href="asistent.html">Asistent</a>
+  <a href="pomocnik.html">Chytrý poradce</a>
+  <a href="nakupy.html">Nákupy</a>
+  <a href="rozpocet.html">Rozpočet</a>
+  <a href="srovnavac.html">Srovnávač</a>
+  <a href="recepty.html">Recepty</a>
+  <a href="prodej.html">Prodej věcí</a>
+  <a href="tarify.html">Tarify</a>
+  <a href="profil.html">Profil</a>
+  <a href="login.html" style="color: #ff4d4d; font-weight: bold;">Odhlásit</a>
+</nav>
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyAcg0qqzWJwkxmopkTgzfasMqd3siQNxIU",
-      authDomain: "zvladnuto-4e6cb.firebaseapp.com",
-      projectId: "zvladnuto-4e6cb",
-      storageBucket: "zvladnuto-4e6cb.appspot.com",
-      messagingSenderId: "299881468872",
-      appId: "1:299881468872:web:8c36e215cf40a91748e6fd",
-      measurementId: "G-HZZG7JRYCC"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    const form = document.getElementById('registerForm');
-    const message = document.getElementById('message');
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          message.innerText = "Registrace úspěšná! Nyní se můžete přihlásit.";
-          form.reset();
-        })
-        .catch((error) => {
-          message.innerText = `Chyba: ${error.message}`;
-        });
-    });
-  </script>
+<div class="obsah">
+  <h1>Index</h1>
+  <p>Obsah stránky index.html</p>
+</div>
 </body>
 </html>

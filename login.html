@@ -1,128 +1,30 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Přihlášení – Zvládnu to</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #70c1b3, #247ba0);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-      color: white;
-    }
-
-    .container {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 30px;
-      border-radius: 15px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
-      width: 90%;
-      max-width: 400px;
-      text-align: center;
-    }
-
-    h1 {
-      margin-bottom: 10px;
-      font-size: 28px;
-    }
-
-    p {
-      margin-bottom: 30px;
-      font-size: 14px;
-      color: #f0f0f0;
-    }
-
-    input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      background-color: #ffffff;
-      color: #247ba0;
-      font-size: 16px;
-      font-weight: bold;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #f2f2f2;
-    }
-
-    .link {
-      margin-top: 20px;
-      font-size: 14px;
-    }
-
-    .link a {
-      color: #ffffff;
-      text-decoration: underline;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Přihlášení</h1>
-    <p>Vítej zpět! Přihlas se do svého účtu a pokračuj tam, kde jsi skončil.</p>
 
-    <input type="email" id="loginEmail" placeholder="Email" required />
-    <input type="password" id="loginPassword" placeholder="Heslo" required />
-    <button onclick="login()">Přihlásit se</button>
+<nav id="nav">
+  <a href="home.html">Domů</a>
+  <a href="asistent.html">Asistent</a>
+  <a href="pomocnik.html">Chytrý poradce</a>
+  <a href="nakupy.html">Nákupy</a>
+  <a href="rozpocet.html">Rozpočet</a>
+  <a href="srovnavac.html">Srovnávač</a>
+  <a href="recepty.html">Recepty</a>
+  <a href="prodej.html">Prodej věcí</a>
+  <a href="tarify.html">Tarify</a>
+  <a href="profil.html">Profil</a>
+  <a href="login.html" style="color: #ff4d4d; font-weight: bold;">Odhlásit</a>
+</nav>
 
-    <div class="link">
-      Ještě nemáš účet? <a href="index.html">Zaregistruj se</a>
-    </div>
-  </div>
-
-  <script type="module">
-    // Firebase
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyAcg0qqzWJwkxmopkTgzfasMqd3siQNxIU",
-      authDomain: "zvladnuto-4e6cb.firebaseapp.com",
-      projectId: "zvladnuto-4e6cb",
-      storageBucket: "zvladnuto-4e6cb.appspot.com",
-      messagingSenderId: "299881468872",
-      appId: "1:299881468872:web:8c36e215cf40a91748e6fd",
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-   function login() {
-  const email = document.getElementById("loginEmail").value;
-  const password = document.getElementById("loginPassword").value;
-
-  signInWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      // Uložení do localStorage
-      localStorage.setItem("userLoggedIn", "true");
-
-      alert("Přihlášení úspěšné!");
-      window.location.href = "home.html";
-    })
-    .catch((error) => {
-      alert("Chyba: " + error.message);
-    });
-}
-
-    window.login = login;
-  </script>
+<div class="obsah">
+  <h1>Login</h1>
+  <p>Obsah stránky login.html</p>
+</div>
 </body>
 </html>
