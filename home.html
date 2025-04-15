@@ -2,35 +2,34 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Zvládnu to - Domů</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zvládnu to – Domů</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <div class="menu-toggle" id="menu-toggle">&#9776;</div>
-    <nav id="navbar" class="hidden">
-      <a href="home.html">Domů</a>
-      <a href="poradce.html">Chytrý poradce</a>
-      <a href="tipy.html">Tipy</a>
-      <a href="profil.html">Profil</a>
-      <a href="login.html" class="logout">Odhlásit se</a>
-    </nav>
+    <h1>Zvládnu to</h1>
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
   </header>
 
+  <nav id="menu" class="hidden">
+    <a href="profil.html">Profil</a>
+    <a href="nakupy.html">Nákupy</a>
+    <a href="rozpocet.html">Rozpočet</a>
+    <a href="pomocnik.html">Chytrý pomocník</a>
+    <a href="recepty.html">Recepty</a>
+    <a href="prodej.html">Prodej věcí</a>
+    <a href="asistent.html">Asistent</a>
+    <a href="tarify.html">Srovnávač tarifů</a>
+    <a href="srovnavac.html">Srovnávač</a>
+    <a href="login.html" class="logout">Odhlásit se</a>
+  </nav>
+
   <main>
-    <h1>Vítej zpět!</h1>
-    <canvas id="myChart"></canvas>
-    <section class="tips">
-      <button class="tip-toggle">Tip 1</button>
-      <div class="tip-content">Zkontroluj si pravidelné výdaje.</div>
-      <button class="tip-toggle">Tip 2</button>
-      <div class="tip-content">Plánuj si týdenní rozpočet.</div>
-    </section>
+    <p>Vítej zpět, vyber si, s čím ti pomohu.</p>
   </main>
 
-  <script src="script.js"></script>
+  <script src="home.js"></script>
 </body>
 </html>
