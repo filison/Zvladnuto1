@@ -50,3 +50,46 @@ nav a:hover {
 .show {
   max-height: 600px;
 }
+/* Resetuj seznamy, kdyby tam někde omylem byly */
+ul, li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Navigace */
+nav {
+  display: flex;
+  flex-direction: column;
+  background-color: #1e1e1e;
+  padding-top: 10px;
+}
+
+/* Odkazy v menu */
+nav a {
+  padding: 12px 20px;
+  text-decoration: none;
+  color: white;
+  border-bottom: 1px solid #333;
+  font-size: 16px;
+  transition: background 0.2s;
+}
+
+nav a:hover {
+  background-color: #333;
+}
+
+/* Odhlásit se červeně */
+.logout {
+  color: #ff4d4d;
+  font-weight: bold;
+}
+
+/* Skryté menu */
+.hidden {
+  display: none;
+}
+
+.show {
+  display: flex;
+}
