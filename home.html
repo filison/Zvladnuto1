@@ -6,174 +6,171 @@
   <title>Zvládnu to – Domů</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      background: linear-gradient(135deg, #70c1b3, #247ba0);
-      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #121212;
+      color: #fff;
+      animation: fadeIn 0.8s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
     }
 
     header {
-      background: rgba(0, 0, 0, 0.2);
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .menu-icon {
+      background-color: #1e1e1e;
+      padding: 20px;
+      text-align: center;
       font-size: 24px;
-      cursor: pointer;
+      font-weight: bold;
     }
 
-    nav {
-      display: none;
-      flex-direction: column;
-      background: rgba(0, 0, 0, 0.4);
-      padding: 10px 20px;
+    .dropdown {
+      position: relative;
+      text-align: center;
+      margin-top: 20px;
     }
 
-    nav a {
+    .dropbtn {
+      background-color: #333;
       color: white;
+      padding: 12px 20px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #222;
+      min-width: 180px;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.3);
+      z-index: 1;
+      border-radius: 8px;
+      padding: 10px 0;
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 10px 16px;
       text-decoration: none;
-      padding: 8px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.2);
+      display: block;
+      transition: background-color 0.3s;
     }
 
-    .container {
-      padding: 20px;
+    .dropdown-content a:hover {
+      background-color: #444;
     }
 
-    .chart-container {
-      background: rgba(255,255,255,0.1);
-      padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 30px;
+    .dropdown:hover .dropdown-content {
+      display: block;
     }
 
-    .tips {
-      background: rgba(255,255,255,0.1);
-      padding: 20px;
-      border-radius: 10px;
+    main {
+      text-align: center;
+      margin: 40px 20px;
+    }
+
+    .tip-box {
+      background-color: #1f1f1f;
+      margin: 15px auto;
+      padding: 15px;
+      border-radius: 8px;
+      max-width: 600px;
     }
 
     .tip-toggle {
-      background-color: #ffffff33;
-      color: white;
-      border: none;
-      padding: 10px;
-      width: 100%;
-      text-align: left;
-      font-size: 16px;
       cursor: pointer;
-      margin-top: 10px;
-      border-radius: 5px;
+      font-weight: bold;
+      margin-bottom: 8px;
     }
 
     .tip-content {
       display: none;
-      padding: 10px;
-      background-color: rgba(0,0,0,0.2);
-      border-radius: 5px;
-      margin-top: 5px;
-      font-size: 14px;
+      margin-top: 10px;
+      text-align: left;
     }
 
     canvas {
+      margin-top: 40px;
       max-width: 100%;
-      height: 200px !important;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h2>Zvládnu to</h2>
-    <div class="menu-icon" onclick="toggleMenu()">☰</div>
-  </header>
+  <header>Zvládnu to – Domů</header>
 
-  <nav id="menu">
-  <a href="overview.html">Přehled</a>
-  <a href="advisor.html">Chytrý poradce</a>
-  <a href="expenses.html">Výdaje</a>
-  <a href="income.html">Příjmy</a>
-  <a href="profile.html">Profil</a>
-  <a href="#" onclick="logout()">Odhlásit se</a>
-</nav>
-
-  <div class="container">
-    <div class="chart-container">
-      <h3>Přehled financí</h3>
-      <canvas id="myChart"></canvas>
-    </div>
-
-    <div class="tips">
-      <h3>Tipy</h3>
-      <button class="tip-toggle">Jak ušetřit za jídlo?</button>
-      <div class="tip-content">Plánuj jídelníček a nakupuj podle seznamu. Sleduj akce v supermarketech.</div>
-
-      <button class="tip-toggle">Jak snížit výdaje za energie?</button>
-      <div class="tip-content">Vyměň žárovky za LED, zhasínej a sniž teplotu v místnosti o 1 °C.</div>
-
-      <button class="tip-toggle">Jak vydělat pár stovek navíc?</button>
-      <div class="tip-content">Prodej nepotřebné věci online nebo nabídni drobné služby ve svém okolí.</div>
+  <div class="dropdown">
+    <button class="dropbtn">Rozcestník</button>
+    <div class="dropdown-content">
+      <a href="profil.html">Můj profil</a>
+      <a href="pomocnik.html">Chytrý poradce</a>
+      <a href="prehled.html">Finanční přehled</a>
+      <a href="nastaveni.html">Nastavení</a>
     </div>
   </div>
 
+  <main>
+    <h2>Vítej zpět!</h2>
+
+    <div class="tip-box">
+      <div class="tip-toggle">Tip 1 – Jak ušetřit při nákupu</div>
+      <div class="tip-content">Využívej srovnávače cen a plánuj si nákupní seznam. Nenech se zlákat slevami na věci, které nepotřebuješ.</div>
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-toggle">Tip 2 – Automatizuj spoření</div>
+      <div class="tip-content">Nastav si trvalý příkaz, který každý měsíc pošle částku stranou hned po výplatě.</div>
+    </div>
+
+    <canvas id="financeChart" width="300" height="150"></canvas>
+  </main>
+
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    // Toggle menu
-    function toggleMenu() {
-      const menu = document.getElementById("menu");
-      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
-    }
-
-    // Logout
-    function logout() {
-      localStorage.removeItem("userLoggedIn");
-      window.location.href = "login.html";
-    }
-
-    // Chart
-    const ctx = document.getElementById('myChart').getContext('2d');
+    const ctx = document.getElementById('financeChart').getContext('2d');
     new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['Příjmy', 'Výdaje'],
+        labels: ['Příjmy', 'Výdaje', 'Úspory'],
         datasets: [{
-          label: 'Kč',
-          data: [12000, 7800],
-          backgroundColor: ['#4CAF50', '#F44336'],
-          borderRadius: 8
+          label: 'Přehled',
+          data: [12000, 8000, 4000],
+          backgroundColor: ['#4caf50', '#f44336', '#2196f3']
         }]
       },
       options: {
-        responsive: true,
         plugins: {
           legend: { display: false }
         },
         scales: {
           y: {
-            beginAtZero: true
+            ticks: { color: '#fff' },
+            grid: { color: '#333' }
+          },
+          x: {
+            ticks: { color: '#fff' },
+            grid: { color: '#333' }
           }
         }
       }
     });
 
-    // Tipy – rozbalovací
-    document.querySelectorAll('.tip-toggle').forEach(button => {
-      button.addEventListener('click', () => {
-        const content = button.nextElementSibling;
-        document.querySelectorAll('.tip-content').forEach(t => {
-          if (t !== content) t.style.display = 'none';
+    document.querySelectorAll('.tip-toggle').forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        const content = toggle.nextElementSibling;
+        document.querySelectorAll('.tip-content').forEach(el => {
+          if (el !== content) el.style.display = 'none';
         });
         content.style.display = content.style.display === 'block' ? 'none' : 'block';
       });
-    });
-
-    // Ověření přihlášení
-    document.addEventListener("DOMContentLoaded", () => {
-      if (!localStorage.getItem("userLoggedIn")) {
-        window.location.href = "login.html";
-      }
     });
   </script>
 </body>
